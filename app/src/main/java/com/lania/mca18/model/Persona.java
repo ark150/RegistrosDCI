@@ -1,7 +1,6 @@
 package com.lania.mca18.model;
 
-public class Persona {
-    private long id;
+public class Persona extends Item {
     private String nombre;
     private String institucionDeOrigen;
     private String facebook;
@@ -10,14 +9,6 @@ public class Persona {
     private Computadora computadora;
     private String uuid;
     private String hash;
-
-    public long getId() {
-        return id;
-    }
-
-    // public void setId(long id) {
-    //     this.id = id;
-    // }
 
     public String getNombre() {
         return nombre;
@@ -83,9 +74,28 @@ public class Persona {
         this.hash = hash;
     }
 
-    public Persona() { }
+    public Persona()
+    {
+        super();
+        initialize();
+    }
 
-    public Persona(long id) {
+    public Persona(long id)
+    {
+        super();
         this.id = id;
+        initialize();
+    }
+
+    protected void initialize()
+    {
+        this.nombre = "";
+        this.institucionDeOrigen = "";
+        this.facebook = "";
+        this.correo = "";
+        // Equipo this.equipo = "";
+        // Computadora this.computadora = "";
+        this.uuid = "";
+        this.hash = "";
     }
 }

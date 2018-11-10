@@ -1,16 +1,7 @@
 package com.lania.mca18.model;
 
-class Equipo {
-    private long id;
+public class Equipo extends Item {
     private String nombre;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -20,9 +11,15 @@ class Equipo {
         this.nombre = nombre;
     }
 
-    public Equipo() { }
+    public Equipo()
+    {
+        super();
+        this.nombre = "";
+    }
 
     public Equipo(long id) {
+        super();
         this.id = id;
+        this.nombre = "";
     }
 }
