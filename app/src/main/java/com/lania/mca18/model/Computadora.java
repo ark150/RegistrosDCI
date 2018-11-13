@@ -1,14 +1,9 @@
 package com.lania.mca18.model;
 
-class Computadora {
-    private long id;
+public class Computadora extends Item {
     private String color;
     private String modelo;
     private Persona propietario;
-
-    public long getId() {
-        return id;
-    }
 
     public String getColor() {
         return color;
@@ -34,9 +29,22 @@ class Computadora {
         this.propietario = propietario;
     }
 
-    public Computadora() {}
+    public Computadora()
+    {
+        super();
+        initialize();
+    }
 
     public Computadora(long id) {
+        super();
         this.id = id;
+        initialize();
+    }
+
+    protected void initialize()
+    {
+        this.color = "";
+        this.modelo = "";
+        //this.propietario = ;
     }
 }
