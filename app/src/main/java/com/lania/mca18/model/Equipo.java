@@ -1,5 +1,8 @@
 package com.lania.mca18.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Equipo extends Item {
     private String nombre;
 
@@ -21,5 +24,26 @@ public class Equipo extends Item {
         super();
         this.id = id;
         this.nombre = "";
+    }
+
+    public Equipo(Item item)
+    {
+        super(item.getType());
+        this.id = item.getId();
+    }
+
+    @Override
+    public String toJSON()
+    {
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("id", this.id);
+            obj.put("nombre", this.nombre);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return obj.toString();
     }
 }

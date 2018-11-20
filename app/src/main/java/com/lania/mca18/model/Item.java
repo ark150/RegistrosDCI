@@ -1,5 +1,10 @@
 package com.lania.mca18.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.StringWriter;
+
 public class Item {
     protected long id;
     private String action;
@@ -32,4 +37,16 @@ public class Item {
         action = "list";
     }
 
+    public String toJSON()
+    {
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("id", this.id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return obj.toString();
+    }
 }

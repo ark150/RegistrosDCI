@@ -1,5 +1,8 @@
 package com.lania.mca18.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Persona extends Item {
     private String nombre;
     private String institucionDeOrigen;
@@ -87,15 +90,42 @@ public class Persona extends Item {
         initialize();
     }
 
+    public Persona(Item item)
+    {
+        super(item.getType());
+        this.id = item.getId();
+    }
+
     protected void initialize()
     {
         this.nombre = "";
         this.institucionDeOrigen = "";
         this.facebook = "";
         this.correo = "";
-        // Equipo this.equipo = "";
-        // Computadora this.computadora = "";
+        // this.equipo = new Equipo();
+        // this.computadora = new Computadora();
         this.uuid = "";
         this.hash = "";
+    }
+
+    @Override
+    public String toJSON()
+    {
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("nombre", this.nombre);
+            obj.put("institucionDeOrigen", this.institucionDeOrigen);
+            obj.put("facebook", this.facebook);
+            obj.put("correo", this.correo);
+            // obj.put("equipo", this.equipo.getId());
+            // obj.put("computadora", this.computadora.getId());
+            // obj.put("uuid", this.uuid);
+            // obj.put("hash", this.hash);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return obj.toString();
     }
 }
