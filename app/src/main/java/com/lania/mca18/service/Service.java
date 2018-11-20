@@ -41,18 +41,68 @@ public class Service {
     }
 
     @Nullable
-    public static JSONObject getJsonObject(String strJson)
+    public static Item getJsonObject(JSONObject ob, String type)
     {
-        JSONObject object = null;
-        try
-        {
-            object = new JSONObject(strJson);
-        } catch(Exception ex)
-        {
-            return null;
-        }
+        Item item = null;
+        try {
+            item = new Item(type);
+            item.setId(Long.parseLong(ob.getString("id")));
 
-        return object;
+            switch (type) {
+                case "computadora":
+                    Computadora pc = new Computadora(item);
+
+                    pc.setModelo(ob.getString("modelo"));
+                    pc.setColor(ob.getString("color"));
+                    // pc.setPropietario(new Persona(Long.parseLong(ob.getString("propietario"))));
+
+                    item = pc;
+                    break;
+
+                case "equipo":
+                    Equipo equipo = new Equipo(item);
+
+                    equipo.setNombre(ob.getString("nombre"));
+
+                    item = equipo;
+                    break;
+
+                case "persona":
+                    Persona persona = new Persona(item);
+                    persona.setNombre(ob.getString("nombre"));
+                    persona.setInstitucionDeOrigen(ob.getString("institucionDeOrigen"));
+                    persona.setFacebook(ob.getString("facebook"));
+                    persona.setCorreo(ob.getString("correo"));
+                    // ((Persona) item).setUuid(ob.getString("uuid"));
+                    // ((Persona) item).setHash(ob.getString("hash"));
+                    // recursión
+                    Equipo _equipo = null;
+                    try {
+                        _equipo = (Equipo)getJsonObject(new JSONObject(ob.getString("equipo")), "equipo");
+                    } catch (Exception ex)
+                    {
+                    }
+                    persona.setEquipo(_equipo);
+
+                    Computadora _pc = null;
+                    try {
+                        _pc = (Computadora) getJsonObject(new JSONObject(ob.getString("computadora")), "computadora");
+                    } catch (Exception ex)
+                    {
+                    }
+                    persona.setComputadora(_pc);
+
+                    item = persona;
+                    break;
+
+                default:
+                    break;
+            }
+        } catch (Exception ex)
+        {
+
+        }
+        return item;
     }
 
     /**
@@ -83,47 +133,7 @@ public class Service {
                 for(int i = 0; i < json.length(); i++)
                 {
                     JSONObject ob = json.getJSONObject(i);
-                    item = new Item(type);
-                    item.setId(Long.parseLong(ob.getString("id")));
-
-                    switch (type)
-                    {
-                        case "computadora":
-                            Computadora pc = new Computadora(item);
-
-                            pc.setModelo(ob.getString("modelo"));
-                            pc.setColor(ob.getString("color"));
-                            // pc.setPropietario(new Persona(Long.parseLong(ob.getString("propietario"))));
-
-                            item = pc;
-                            break;
-
-                        case "equipo":
-                            Equipo equipo = new Equipo(item);
-
-                            equipo.setNombre(ob.getString("nombre"));
-
-                            item = equipo;
-                            break;
-
-                        case "persona":
-                            Persona persona = new Persona(item);
-                            persona.setNombre(ob.getString("nombre"));
-                            persona.setInstitucionDeOrigen(ob.getString("institucionDeOrigen"));
-                            persona.setFacebook(ob.getString("facebook"));
-                            persona.setCorreo(ob.getString("correo"));
-                            // ((Persona) item).setUuid(ob.getString("uuid"));
-                            // ((Persona) item).setHash(ob.getString("hash"));
-                            persona.setEquipo(new Equipo());
-                            persona.setComputadora(new Computadora());
-
-                            item = persona;
-                            break;
-
-                        default:
-                            break;
-                    }
-
+                    item = getJsonObject(ob, type);
                     items.add(item);
                 }
             }

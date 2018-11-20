@@ -43,7 +43,11 @@ public class DataAsync extends AsyncTask<Item, Void, String>
             if(!(item.getId() == 0))
                 id = String.valueOf(item.getId());
 
-            String action = item.getAction() + "/" + id;
+            String action = item.getAction();
+            if(!(item.getAction() == ""))
+                action +=  "/";
+
+                action += id;
             type = "";
 
             if (item instanceof Computadora)
@@ -111,10 +115,15 @@ public class DataAsync extends AsyncTask<Item, Void, String>
         try {
             jsonResult.put("type", type);
             jsonResult.put("object", new JSONArray(result.toString()));
-            return jsonResult.toString();
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            try {
+                jsonResult.put("object", new JSONArray("[" + result.toString() + "]"));
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+                return null;
+            }
         }
+        return jsonResult.toString();
     }
 }
