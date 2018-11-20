@@ -8,6 +8,10 @@ import com.lania.mca18.model.Item;
 import com.lania.mca18.model.Computadora;
 import com.lania.mca18.model.Persona;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -62,12 +66,7 @@ public class DataAsync extends AsyncTask<Item, Void, String>
                 connection.setRequestMethod("POST");
                 dStream = new DataOutputStream(connection.getOutputStream());
 
-                // Sustituir con datos de instancias
-                String a = "{\n" +
-                        "    \"nombre\": \"los dragones 22\"\n" +
-                        "}";
-
-                dStream.writeBytes(a); //Writes out the string to the underlying output stream as a sequence of bytes
+                dStream.writeBytes(item.toJSON()); //Writes out the string to the underlying output stream as a sequence of bytes
                 dStream.flush(); // Flushes the data output stream.
                 dStream.close(); // Closing the output stream.
             }
@@ -104,9 +103,18 @@ public class DataAsync extends AsyncTask<Item, Void, String>
             return null;
         }
 
-        String jsonResult = "{'type' : '" + type +
-                "', 'object' : " + result.toString() +"}";
+        //String jsonResult = "{'type' : '" + type +
+                //"', 'object' : " + result.toString() +"}";
 
-        return jsonResult;
+        JSONObject jsonResult = new JSONObject();
+
+        try {
+            jsonResult.put("type", type);
+            jsonResult.put("object", new JSONArray(result.toString()));
+            return jsonResult.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

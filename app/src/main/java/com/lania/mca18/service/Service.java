@@ -77,10 +77,6 @@ public class Service {
                 Log.e("Fallo JSON", "No se pudo obtener el arreglo JSON");
             }
 
-            // Se necesita conocer qué tipo de objeto es
-            // En base del tipo de objeto JSON, agregar objetos
-            // a la lista que se regresará.
-
             if(!(json == null))
             {
                 Item item;
@@ -93,28 +89,35 @@ public class Service {
                     switch (type)
                     {
                         case "computadora":
-                            // Computadora cannot be cast to item type... Fix it!
+                            Computadora pc = new Computadora(item);
 
-                            ((Computadora) item).setModelo(ob.getString("modelo"));
-                            ((Computadora) item).setColor(ob.getString("color"));
-                            //((Computadora) item).setModelo(ob.getString("propietario"));
+                            pc.setModelo(ob.getString("modelo"));
+                            pc.setColor(ob.getString("color"));
+                            // pc.setPropietario(new Persona(Long.parseLong(ob.getString("propietario"))));
+
+                            item = pc;
                             break;
 
                         case "equipo":
-                            ((Equipo) item).setNombre(ob.getString("nombre"));
-                            //((Computadora) item).setModelo(ob.getString("propietario"));
+                            Equipo equipo = new Equipo(item);
+
+                            equipo.setNombre(ob.getString("nombre"));
+
+                            item = equipo;
                             break;
 
                         case "persona":
-                            ((Persona) item).setNombre(ob.getString("nombre"));
-                            ((Persona) item).setInstitucionDeOrigen(ob.getString("institucionDeOrigen"));
-                            ((Persona) item).setFacebook(ob.getString("facebook"));
-                            ((Persona) item).setCorreo(ob.getString("correo"));
+                            Persona persona = new Persona(item);
+                            persona.setNombre(ob.getString("nombre"));
+                            persona.setInstitucionDeOrigen(ob.getString("institucionDeOrigen"));
+                            persona.setFacebook(ob.getString("facebook"));
+                            persona.setCorreo(ob.getString("correo"));
                             // ((Persona) item).setUuid(ob.getString("uuid"));
                             // ((Persona) item).setHash(ob.getString("hash"));
+                            persona.setEquipo(new Equipo());
+                            persona.setComputadora(new Computadora());
 
-                            //((Persona) item).setEquipo.
-                            //private Computadora computadora;
+                            item = persona;
                             break;
 
                         default:
@@ -124,32 +127,6 @@ public class Service {
                     items.add(item);
                 }
             }
-
-            /*Item item;
-            for (int i = 0; i < json.length(); i++)
-            {
-                item = new Item();
-                JSONObject ob = json.getJSONObject(i);
-                event.setId(ob.getString("ev_id"));
-                event.setName(ob.getString("ev_name"));
-                event.setDescription(ob.getString("ev_des"));
-                String strDate = ob.getString("ev_sch");
-                strDate = strDate.replace("-", "/");
-                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US);
-                event.setDate(format.parse(strDate));
-
-                try
-                {
-                    event.getType().setId(Integer.parseInt(ob.getString("tp_id")));
-                    event.getType().setName(ob.getString("tp_name"));
-                }
-                catch (Exception ex)
-                {
-                    Log.w("Tipo de Ev", "Excepción al agregar el tipo de evento");
-                }
-
-                items.add(item);
-            }*/
         }
         catch (Exception ex)
         {
@@ -206,17 +183,7 @@ public class Service {
         if (id == null)
             id = "null";
 
-        //Item item;
-        //ev.setId(id);
-        //ev.getType().setId(type);
         String json = "";
-
-        /*if (item instanceof Computadora)
-            strUrl += "computadora/";
-        else if (item instanceof Equipo)
-            strUrl += "equipo/";
-        else if (item instanceof Persona)
-            strUrl += "persona/";*/
 
         try
         {
@@ -252,7 +219,7 @@ public class Service {
                     //items = getItemsList(json);
                     //it = getItem(json, "Computadora");
                     //Log.d("Test Item", String.valueOf(it));
-                    getItemsList(new JSONObject(json));
+                    items = getItemsList(new JSONObject(json));
                 }
                 else
                 {
@@ -261,9 +228,9 @@ public class Service {
                 }
             } catch (Exception ex)
             {
-                Log.e("JSON Exception", "Error al leer JSON/Agregar objetos a la lista de eventos");
+                Log.e("JSON Exception", "Error al leer JSON/Agregar objetos a la lista de elementos");
             }
-            Log.d("Long lista de eventos", String.valueOf(items.size()));
+            Log.d("Long lista de elementos", String.valueOf(items.size()));
 
             return items;
         }
