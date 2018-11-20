@@ -26,6 +26,12 @@ public class Equipo extends Item {
         this.nombre = "";
     }
 
+    public Equipo(long id, String nombre) {
+        super();
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public Equipo(Item item)
     {
         super(item.getType());
