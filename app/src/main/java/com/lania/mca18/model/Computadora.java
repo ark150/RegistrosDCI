@@ -1,5 +1,8 @@
 package com.lania.mca18.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Computadora extends Item {
     private String color;
     private String modelo;
@@ -41,10 +44,32 @@ public class Computadora extends Item {
         initialize();
     }
 
+    public Computadora(Item item)
+    {
+        super(item.getType());
+        this.id = item.getId();
+    }
+
     protected void initialize()
     {
         this.color = "";
         this.modelo = "";
         //this.propietario = ;
+    }
+
+    @Override
+    public String toJSON()
+    {
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("id", this.id);
+            obj.put("modelo", this.modelo);
+            obj.put("color", this.color);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return obj.toString();
     }
 }
