@@ -26,7 +26,7 @@
 
             <TextView
                 android:id="@+id/textViewQR"
-                android:layout_width="202dp"
+                android:layout_width="wrap_content"
                 android:layout_height="27dp"
                 android:layout_marginStart="17dp"
                 android:text="@string/qr_tex1"
@@ -34,7 +34,7 @@
 
             <TextView
                 android:id="@+id/textViewQR2"
-                android:layout_width="199dp"
+                android:layout_width="wrap_content"
                 android:layout_height="64dp"
                 android:layout_marginStart="17dp"
                 android:text="@string/qr_tex2"
@@ -61,7 +61,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp">
 
@@ -83,8 +83,8 @@
         android:text="@string/ver_2" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="328dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp">
 
@@ -106,8 +106,8 @@
         android:text="@string/ver_3" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="328dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp">
 
@@ -129,13 +129,12 @@
         android:text="@string/ver_4" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="328dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp">
 
         <android.support.design.widget.TextInputEditText
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:backgroundTint="@color/ColorPrincipal">
@@ -151,15 +150,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:text="@string/ver_5" />
-<!--
+
     <android.support.design.widget.TextInputLayout
-        android:layout_width="328dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp">
 
         <android.support.design.widget.TextInputEditText
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:backgroundTint="@color/ColorPrincipal">
@@ -177,13 +175,12 @@
         android:text="@string/ver_6" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="328dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp">
 
         <android.support.design.widget.TextInputEditText
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:backgroundTint="@color/ColorPrincipal">
@@ -201,13 +198,12 @@
         android:text="@string/ver_7" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="328dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp">
 
         <android.support.design.widget.TextInputEditText
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:backgroundTint="@color/ColorPrincipal">
@@ -215,7 +211,7 @@
         </android.support.design.widget.TextInputEditText>
 
     </android.support.design.widget.TextInputLayout>
--->
+
 
     <CheckBox
         android:id="@+id/checkBox"

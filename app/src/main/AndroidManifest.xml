@@ -3,6 +3,7 @@
     package="com.lania.mca18.registrosdci">
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -20,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CamaraActivity"/>
+        <activity android:name=".RegistroESFragment"/>
     </application>
 
 </manifest>

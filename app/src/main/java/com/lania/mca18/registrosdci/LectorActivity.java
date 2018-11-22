@@ -32,12 +32,17 @@ public class LectorActivity extends Fragment {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RegistroESFragment fr= new RegistroESFragment();
-                CamaraActivity camaraActivity= new CamaraActivity();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.show(fr);
-                fragmentTransaction.commit();
+                try {
+                    //RegistroESFragment fr = new RegistroESFragment();
+                    //CamaraActivity camaraActivity = new CamaraActivity();
+                    //pasarF(camaraActivity);
+                    Intent i = new Intent(getContext(),CamaraActivity.class);
+                    getActivity().startActivity(i);
+
+
+                }catch (Exception e){
+                    Log.e("Error/lania",e.getMessage());
+                }
                 //fragmentTransaction.replace(R.id.fragmentLector,fr);
                 //Toast.makeText(getActivity(),"funcion boton qr",Toast.LENGTH_LONG).show();
                 //CamaraActivity camaraActivity = new CamaraActivity();
@@ -52,10 +57,13 @@ public class LectorActivity extends Fragment {
         return view;
     }
 
-
-
-
-
+    public void pasarF(Fragment fragment){
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentLector, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        getActivity().getSupportFragmentManager().executePendingTransactions();
+    }
 
 }
 

@@ -1,5 +1,6 @@
 package com.lania.mca18.registrosdci;
 
+import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         //agregar fragments
         adapter.addFragment(new ListadoActivity(),"Listado");
         adapter.addFragment(new VerificacionActivity(),"Verificacion");
-        adapter.addFragment(new LectorActivity(),"Registro I/O");
-        adapter.addFragment(new CamaraActivity(),"Camara");
+        adapter.addFragment (new LectorActivity(),"Registro I/O");
+        //adapter.addFragment(new CamaraActivity(),"Camara");
         //adapter setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
