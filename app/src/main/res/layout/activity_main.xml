@@ -7,37 +7,34 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /> -->
-
-    <android.support.design.widget.TabLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tab 1" />
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tab 2"/>
+        android:layout_height="60dp"
+        android:background="@color/ColorPrincipal">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tab 3"/>
-    </android.support.design.widget.TabLayout>
-
-    <Button
-        android:id="@+id/btnRepeat"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="144dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="237dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/IL"
+            android:src="@drawable/lania_blue" />
+    </android.support.design.widget.AppBarLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Haz click!"/>
+        android:background="@color/ColorPrincipal"
+        app:tabTextColor="@color/ColorBase"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        style="@style/AppTheme"/>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewpager"/>
 
 </LinearLayout>

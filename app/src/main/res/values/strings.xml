@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">RegistrosDCI</string>
+
+    <string name="tab_1">Listado</string>
+    <string name="tab_2">Verificacion</string>
+    <string name="tab_3">Registro I/O</string>
+
+    <string name="ver_1">Nombre completo</string>
+    <string name="ver_2">Instituto de origen</string>
+    <string name="ver_3">Facebook</string>
+    <string name="ver_4">Nombre del equipo</string>
+    <string name="ver_5">Color del Equipo de Cómputo</string>
+    <string name="ver_6">Modelo del Equipo de Cómputo</string>
+    <string name="ver_7">Correo</string>
+    <string name="bot_1">Aceptar</string>
+    <string name="bot_2">Limpiar</string>
+    <string name="qr_tex1">Escanea un codigo QR</string>
+    <string name="qr_tex2"> Utiliza este dispositivo para escanear la informacion. Presiona el codigo para hacer uso de esta funcion</string>
+    <string name="check_text">Aceptacion de Terminos de Uso</string>
+    <string name="IB">Activa el lector QR</string>
+    <string name="IL">Logo lania</string>
+    <string name="but_b">Buscar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,6 +1,12 @@
 package com.lania.mca18.registrosdci;
 
-import android.content.Context;
+import android.net.Uri;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -20,67 +26,34 @@ import com.lania.mca18.service.Service;
 
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-    List<Item> list;
-    Thread tr;
-    private Button btnRepeat;
+    private TabLayout tabLayout;
+    private AppBarLayout appBarLayout;
+    private ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        appBarLayout=(AppBarLayout)findViewById(R.id.appbarid);
+        viewPager= (ViewPager)findViewById(R.id.viewpager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        //agregar fragments
+        adapter.addFragment(new ListadoActivity(),"Listado");
+        adapter.addFragment(new VerificacionActivity(),"Verificacion");
+        adapter.addFragment (new LectorActivity(),"Registro I/O");
+        //adapter.addFragment(new CamaraActivity(),"Camara");
+        //adapter setup
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
 
-        btnRepeat = findViewById(R.id.btnRepeat);
-        btnRepeat.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                click();
-            }
-        });
-
-        tr = setLoadingThread();
-        tr.start();
     }
 
-    private Thread setLoadingThread()
-    {
-        DataAsync da = new DataAsync();
-        final Computadora pc = new Computadora();
-        //persona.setNombre("Dell");
-        pc.setModelo("Lenovo");
-        pc.setAction("list");
 
-        Thread tr = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    //events = service.getData(getActivity().getApplicationContext(), null, eventType);
-                    list = Service.getData(getApplicationContext(), "3", pc);
-                    Log.d("Thread tr", "Tamaño:" + String.valueOf(list.size()));
-                    //assertTrue(list.size() > 0);
-                    //Log.d("Eventos encontrados", String.valueOf(events.size()));
-                }
-                catch (Exception ex)
-                {
-                    //Log.d("Thread tr", "Ha ocurrido un error al intentar cargar los datos");
-                    //Log.e("Error Thread", ex.getMessage());
-                }
-            }
-        };
-
-        //tr.start();
-        //tr.run();
-        //assertTrue(list.size() > 0);
-
-        return tr;
-    }
-
-    private void click() {
-        //tr.start();
-        Toast toast = Toast.makeText(this, "Click", Toast.LENGTH_SHORT);
-        toast.show();
-    }
 }
