@@ -6,21 +6,45 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.lania.mca18.model.Equipo;
+import com.lania.mca18.model.Item;
+import com.lania.mca18.model.Persona;
+import com.lania.mca18.service.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListadoActivity extends Fragment {
     private Spinner spinner1;
     View view;
+
+    List<Item> itemsList;
+    Service service;
+    Item chosenItemType;
+
+
     public ListadoActivity(){
 
     }
 
-    @Nullable
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        itemsList = new ArrayList<>();
+        service = new Service();
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.listado,container,false);
@@ -29,8 +53,104 @@ public class ListadoActivity extends Fragment {
 
         ArrayAdapter <String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item_dci, opciones);
         spinner1.setAdapter(adapter);
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                //Toast t = Toast.makeText(getContext(), "Sel", Toast.LENGTH_SHORT);
+                //t.show();
+
+                switch (position)
+                {
+                    case 0:
+                        chosenItemType = new Persona();
+                        break;
+                    case 1:
+                        chosenItemType = new Equipo();
+                        break;
+                }
+
+                chosenItemType.setAction(Item.LIST);
+                setLoadingThread().run();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         return view;
     }
 
+    /**
+     * Crea el hilo sobre el cual correrá el proceso
+     * de obtención de datos.
+     * @return Thread obtención de datos para la vista "ListadoActivity"
+     */
+    private Thread setLoadingThread()
+    {
+        itemsList = new ArrayList<>();  // Limpia datos anteriores
+        Thread tr = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                // Obtiene datos.
+                try
+                {
+                    itemsList = service.getData(getActivity().getApplicationContext(),
+                            "", chosenItemType);
+                } catch (Exception ex)
+                {
+                    Log.d("Thread tr", "Ha ocurrido un error al intentar cargar los datos");
+                    Log.e("Error Thread", ex.getMessage());
+                }
 
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try
+                        {
+                            if(itemsList != null)
+                            {
+                                if(itemsList.size() == 0)
+                                {
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            "No hay eventos resgistrados", Toast.LENGTH_SHORT).show();
+                                } else
+                                {
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            "Éxito :D " + itemsList.size(),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                                //Para mostrar en interfaz de usuario
+                                //adapter = new EventAdapter(itemsList);
+                                //recycler.setAdapter(adapter);
+                            }
+                            else
+                            {
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "No se encontraron datos", Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (Exception ex)
+                        {
+                            String msg = "";
+                            if(itemsList == null)
+                                msg = "Ha habido un problema. Verifica tu conexión a internet";
+                            else
+                                msg = "Ha habido un problema";
+
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    msg, Toast.LENGTH_LONG).show();
+                            Log.e("Mensaje de error", ex.getMessage());
+                        }
+                    }
+                });
+            }
+        };
+
+        return tr;
+    }
 }
