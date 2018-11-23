@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.lania.mca18.adapter.ItemsListAdapter;
 import com.lania.mca18.model.Equipo;
 import com.lania.mca18.model.Item;
 import com.lania.mca18.model.Persona;
@@ -33,6 +36,12 @@ public class ListadoActivity extends Fragment {
     Item chosenItemType;
 
 
+    // Recycler
+    private RecyclerView recycler;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager IManager;
+
+
     public ListadoActivity(){
 
     }
@@ -48,11 +57,19 @@ public class ListadoActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.listado,container,false);
+
+        // Inicializa RecyclerView
+        recycler = (RecyclerView)view.findViewById(R.id.listaItems);
+        IManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recycler.setLayoutManager(IManager);
+
+
+        // Inicializa opciones de listados
         spinner1 = (Spinner)view.findViewById(R.id.spinner4);
         String [] opciones = {"Personas", "Equipos"};
 
-        ArrayAdapter <String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item_dci, opciones);
-        spinner1.setAdapter(adapter);
+        ArrayAdapter <String> spinner_adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item_dci, opciones);
+        spinner1.setAdapter(spinner_adapter);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -126,8 +143,8 @@ public class ListadoActivity extends Fragment {
                                 }
 
                                 //Para mostrar en interfaz de usuario
-                                //adapter = new EventAdapter(itemsList);
-                                //recycler.setAdapter(adapter);
+                                adapter = new ItemsListAdapter(itemsList);
+                                recycler.setAdapter(adapter);
                             }
                             else
                             {
