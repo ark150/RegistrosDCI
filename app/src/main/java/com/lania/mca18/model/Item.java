@@ -10,6 +10,9 @@ public class Item {
     private String action;
     private String type;
 
+    public static String CREATE = "create";
+    public static String LIST = "list";
+
     public long getId() {
         return id;
     }
@@ -28,13 +31,13 @@ public class Item {
 
     public Item()
     {
-        action = "create";
+        action = Item.CREATE;
     }
 
     public Item(String type)
     {
         this.type = type;
-        action = "list";
+        action = Item.LIST;
     }
 
     public String toJSON()
