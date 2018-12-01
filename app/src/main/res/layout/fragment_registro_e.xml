@@ -32,6 +32,9 @@
                     android:id="@+id/val_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textIsSelectable="true"
+                    android:focusable="false"
                     tools:backgroundTint="@color/ColorPrincipal">
 
                 </android.support.design.widget.TextInputEditText>
@@ -56,6 +59,9 @@
                     android:id="@+id/val_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textIsSelectable="true"
+                    android:focusable="false"
                     tools:backgroundTint="@color/ColorPrincipal">
 
                 </android.support.design.widget.TextInputEditText>
@@ -80,6 +86,9 @@
                     android:id="@+id/val_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textIsSelectable="true"
+                    android:focusable="false"
                     tools:backgroundTint="@color/ColorPrincipal">
 
                 </android.support.design.widget.TextInputEditText>
@@ -104,6 +113,9 @@
                     android:id="@+id/val_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textIsSelectable="true"
+                    android:focusable="false"
                     tools:backgroundTint="@color/ColorPrincipal">
 
                 </android.support.design.widget.TextInputEditText>
@@ -128,6 +140,9 @@
                         android:id="@+id/val_5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:textIsSelectable="true"
+                        android:focusable="false"
                         tools:backgroundTint="@color/ColorPrincipal">
 
                     </android.support.design.widget.TextInputEditText>
@@ -152,6 +167,9 @@
                         android:id="@+id/val_6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:textIsSelectable="true"
+                        android:focusable="false"
                         tools:backgroundTint="@color/ColorPrincipal">
 
                     </android.support.design.widget.TextInputEditText>
@@ -176,6 +194,9 @@
                         android:id="@+id/val_7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:textIsSelectable="true"
+                        android:focusable="false"
                         tools:backgroundTint="@color/ColorPrincipal">
 
                     </android.support.design.widget.TextInputEditText>
@@ -195,16 +216,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="46dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
 
 
                 <android.support.design.button.MaterialButton
-                    android:id="@+id/btnAceptar"
-                    android:layout_width="110dp"
+                android:id="@+id/btnRegistrarE"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:text="@string/bot_RegE"
+                android:background="@color/ColorPrincipal"
+                android:textColor="@color/ColorBase">
+
+            </android.support.design.button.MaterialButton>
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/btnRegistrarS"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
-                    android:text="@string/bot_1"
+                    android:text="@string/bot_RegS"
                     android:background="@color/ColorPrincipal"
                     android:textColor="@color/ColorBase">
 

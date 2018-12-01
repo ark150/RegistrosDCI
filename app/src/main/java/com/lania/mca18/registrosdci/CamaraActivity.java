@@ -50,11 +50,20 @@ public class CamaraActivity extends Activity implements ZBarScannerView.ResultHa
         // Do something with the result here
         //Log.v(TAG, rawResult.getContents()); // Prints scan results
         //Log.v(TAG, rawResult.getBarcodeFormat().getName()); // Prints the scan format (qrcode, pdf417 etc.)
-        Bundle bundle=new Bundle();
-        bundle.putString("code_qr",rawResult.getContents().toString());
-        Intent i = new Intent(this,RegistroESFragment.class);
-        i.putExtra("code_qr",rawResult.getContents().toString());
-        startActivity(i);
+        String pantalla=getIntent().getExtras().getString("pantalla");
+        if(pantalla.equals("reg")) {
+            Bundle bundle = new Bundle();
+            bundle.putString("code_qr", rawResult.getContents().toString());
+            Intent i = new Intent(this, RegistroESFragment.class);
+            i.putExtra("code_qr", rawResult.getContents().toString());
+            startActivity(i);
+        }else{
+            Bundle bundle = new Bundle();
+            bundle.putString("code_qr", rawResult.getContents().toString());
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("code_qr", rawResult.getContents().toString());
+            startActivity(i);
+        }
 
 
         System.out.println(rawResult.getContents());

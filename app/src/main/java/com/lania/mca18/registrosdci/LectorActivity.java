@@ -37,6 +37,7 @@ public class LectorActivity extends Fragment {
                     //CamaraActivity camaraActivity = new CamaraActivity();
                     //pasarF(camaraActivity);
                     Intent i = new Intent(getContext(),CamaraActivity.class);
+                    i.putExtra("pantalla","reg");
                     getActivity().startActivity(i);
 
 

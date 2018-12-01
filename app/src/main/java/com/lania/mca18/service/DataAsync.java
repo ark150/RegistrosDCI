@@ -34,10 +34,10 @@ public class DataAsync extends AsyncTask<Item, Void, String>
         try
         {
             // IP fija
-            // String strUrl = "http://192.168.0.9:8080/";
+             String strUrl = "http://192.168.1.68:8080/";
 
             // Localhost
-            String strUrl = "http://10.0.2.2:8080/";
+            //String strUrl = "http://10.0.2.2:8080/";
 
             String id = "";
             if(!(item.getId() == 0))

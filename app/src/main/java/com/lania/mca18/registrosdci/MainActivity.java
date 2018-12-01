@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ListadoActivity(),"Listado");
         adapter.addFragment(new VerificacionActivity(),"Verificacion");
         adapter.addFragment (new LectorActivity(),"Registro I/O");
-        //adapter.addFragment(new CamaraActivity(),"Camara");
-        //adapter setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
