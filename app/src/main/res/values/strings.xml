@@ -20,6 +20,8 @@
     <string name="IB">Activa el lector QR</string>
     <string name="IL">Logo lania</string>
     <string name="but_b">Buscar</string>
+    <string name="bot_RegE">Registrar E</string>
+    <string name="bot_RegS">Registrar S</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
