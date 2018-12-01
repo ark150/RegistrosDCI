@@ -64,7 +64,7 @@ public class DataAsync extends AsyncTask<Item, Void, String>
             connection.setRequestProperty("Content-Type", "application/json");
             DataOutputStream dStream;
 
-            if(item.getAction() == "create")
+            if(item.getAction() == Item.CREATE)
             {
                 connection.setDoOutput(true);
                 connection.setRequestMethod("POST");
