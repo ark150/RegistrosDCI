@@ -3,6 +3,7 @@ package com.lania.mca18.service;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.lania.mca18.Settings.SettingsDev;
 import com.lania.mca18.model.Equipo;
 import com.lania.mca18.model.Item;
 import com.lania.mca18.model.Computadora;
@@ -34,10 +35,10 @@ public class DataAsync extends AsyncTask<Item, Void, String>
         try
         {
             // IP fija
-             String strUrl = "http://192.168.1.68:8080/";
+            // String strUrl = SettingsDev.LOCAL_IP;
 
             // Localhost
-            //String strUrl = "http://10.0.2.2:8080/";
+            String strUrl = SettingsDev.LOCALHOST_IP;
 
             String id = "";
             if(!(item.getId() == 0))
