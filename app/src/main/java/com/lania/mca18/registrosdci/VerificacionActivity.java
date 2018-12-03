@@ -36,15 +36,7 @@ public class VerificacionActivity extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.verificacion,container,false);
-        imgBQR=(ImageButton) view.findViewById(R.id.botonQRV);
-        imgBQR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(),CamaraActivity.class);
-                i.putExtra("pantalla","ver");
-                getActivity().startActivity(i);
-            }
-        });
+
         //String valor=getArguments().getString("code_qr");
         //val1 = (TextInputEditText) view.findViewById(R.id.val_1);
         //val1.setText(valor);
