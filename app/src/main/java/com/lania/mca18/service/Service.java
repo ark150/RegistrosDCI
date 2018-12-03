@@ -42,7 +42,7 @@ public class Service {
 
     @Nullable
     public static Item getJsonObject(JSONObject ob, String type)
-    {
+        {
         Item item = null;
         try {
             item = new Item(type);
