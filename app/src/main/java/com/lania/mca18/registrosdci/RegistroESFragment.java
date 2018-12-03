@@ -26,6 +26,11 @@ import java.util.Date;
 public class RegistroESFragment extends Activity {
     private TextInputEditText val1;
     private TextInputEditText val2;
+    private TextInputEditText val3;
+    private TextInputEditText val4;
+    private TextInputEditText val5;
+    private TextInputEditText val6;
+    private TextInputEditText val7;
 
     Service service;
     Item chosenItemType;
@@ -38,10 +43,22 @@ public class RegistroESFragment extends Activity {
         setContentView(R.layout.fragment_registro_e);
         final String valor=getIntent().getExtras().getString("code_qr");
         val1 = (TextInputEditText) findViewById(R.id.val_1);
+        val2= (TextInputEditText) findViewById(R.id.val_2);
+        val3= (TextInputEditText) findViewById(R.id.val_3);
+        val4= (TextInputEditText) findViewById(R.id.val_4);
+        val5= (TextInputEditText) findViewById(R.id.val_5);
+        val6= (TextInputEditText) findViewById(R.id.val_6);
+        val7= (TextInputEditText) findViewById(R.id.val_7);
         val1.setText(valor);
+        val2.setText(valor);
+        val3.setText(valor);
+        val4.setText(valor);
+        val5.setText(valor);
+        val6.setText(valor);
+        val7.setText(valor);
         if(persona!=null){
         persona= (Persona) service.getItem(valor,"Persona");
-        val2= (TextInputEditText) findViewById(R.id.val_2);
+
         val2.setText(persona.getNombre());
         }else{
             Log.e("Error","no se carga el objeto");
