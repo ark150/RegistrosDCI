@@ -35,10 +35,10 @@ public class DataAsync extends AsyncTask<Item, Void, String>
         try
         {
             // IP fija
-            // String strUrl = SettingsDev.LOCAL_IP;
+            String strUrl = SettingsDev.LOCAL_IP;
 
             // Localhost
-            String strUrl = SettingsDev.LOCALHOST_IP;
+            //String strUrl = SettingsDev.LOCALHOST_IP;
 
             String id = "";
             if(!(item.getId() == 0))

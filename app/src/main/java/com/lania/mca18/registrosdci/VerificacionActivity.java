@@ -49,8 +49,8 @@ public class VerificacionActivity extends Fragment implements View.OnClickListen
         //val1 = (TextInputEditText) view.findViewById(R.id.val_1);
         //val1.setText(valor);
 
-        btnAceptar = (Button)view.findViewById(R.id.btnAceptar);
-        btnAceptar.setOnClickListener(this);
+        //btnAceptar = (Button)view.findViewById(R.id.btnAceptar);
+        //btnAceptar.setOnClickListener(this);
 
         return view;
     }
