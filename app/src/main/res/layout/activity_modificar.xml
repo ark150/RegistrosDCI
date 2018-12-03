@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textViewm1"
                 android:layout_width="155dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -32,6 +32,7 @@
                 android:layout_marginTop="5dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mod_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:backgroundTint="@color/ColorPrincipal">
@@ -41,7 +42,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewm2"
                 android:layout_width="176dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -55,6 +56,7 @@
                 android:layout_marginTop="5dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mod_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:backgroundTint="@color/ColorPrincipal">
@@ -64,7 +66,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textViewm3"
                 android:layout_width="80dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -78,6 +80,7 @@
                 android:layout_marginTop="5dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mod_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:backgroundTint="@color/ColorPrincipal">
@@ -87,7 +90,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textViewm4"
                 android:layout_width="165dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -101,6 +104,7 @@
                 android:layout_marginTop="5dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mod_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:backgroundTint="@color/ColorPrincipal">
@@ -110,7 +114,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textViewm5"
                 android:layout_width="250dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -124,6 +128,7 @@
                 android:layout_marginTop="5dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mod_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:backgroundTint="@color/ColorPrincipal">
@@ -133,7 +138,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textViewm6"
                 android:layout_width="267dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -147,6 +152,7 @@
                 android:layout_marginTop="5dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mod_6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:backgroundTint="@color/ColorPrincipal">
@@ -156,7 +162,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textViewm7"
                 android:layout_width="57dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
@@ -170,6 +176,7 @@
                 android:layout_marginTop="5dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/mod_7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:backgroundTint="@color/ColorPrincipal">

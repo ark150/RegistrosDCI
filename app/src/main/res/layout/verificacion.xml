@@ -7,41 +7,6 @@
     android:orientation="vertical"
     android:layout_marginBottom="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
 
-        <ImageButton
-            android:id="@+id/botonQRV"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="15dp"
-            android:contentDescription="@string/IB"
-            app:srcCompat="@drawable/qr_lania" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewQR"
-                android:layout_width="wrap_content"
-                android:layout_height="27dp"
-                android:layout_marginStart="17dp"
-                android:text="@string/qr_tex1"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textViewQR2"
-                android:layout_width="wrap_content"
-                android:layout_height="64dp"
-                android:layout_marginStart="17dp"
-                android:text="@string/qr_tex2"
-                android:textSize="12sp" />
-        </LinearLayout>
-    </LinearLayout>
 
 </LinearLayout>
