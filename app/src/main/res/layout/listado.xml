@@ -10,22 +10,42 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spinner4"
-            android:layout_width="242dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/but_b" />
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner4"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:visibility="visible"/>
+
+            <SearchView
+                android:id="@+id/svSearch"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="right"
+                android:visibility="visible"
+                android:iconifiedByDefault="true"
+                ></SearchView>
+
+        </LinearLayout>
+
+        <!--<Button
+            android:id="@+id/btnSearch"
+            android:layout_width="68dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/ColorBase"
+            android:backgroundTint="@color/ColorBase"
+            app:icon="@android:drawable/ic_menu_search"
+            app:iconTint="@color/ColorPrincipal" />-->
     </LinearLayout>
 
 

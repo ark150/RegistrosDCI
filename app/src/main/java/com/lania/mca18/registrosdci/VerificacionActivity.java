@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.lania.mca18.adapter.ItemsListAdapter;
+import com.lania.mca18.service.Service;
 
-public class VerificacionActivity extends Fragment  {
+import java.util.ArrayList;
+
+
+public class VerificacionActivity extends Fragment implements View.OnClickListener {
     View view;
     ImageButton imgBQR;
+    Button btnLimpiar, btnAceptar;
+    Service service;
+
     private TextInputEditText val1;
     public VerificacionActivity(){
 
@@ -40,7 +49,27 @@ public class VerificacionActivity extends Fragment  {
         //val1 = (TextInputEditText) view.findViewById(R.id.val_1);
         //val1.setText(valor);
 
+        btnAceptar = (Button)view.findViewById(R.id.btnAceptar);
+        btnAceptar.setOnClickListener(this);
+
         return view;
     }
 
+    @Override
+    /**
+     * Evento onClick para el botón "btnAceptar"
+     */
+    public void onClick(View v) {
+
+    }
+
+    
+
+    /*private boolean validateData()
+    {
+        boolean valid = true;
+        if()
+
+        return valid;
+    }*/
 }

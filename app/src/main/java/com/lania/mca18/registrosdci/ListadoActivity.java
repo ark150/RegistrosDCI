@@ -1,11 +1,9 @@
 package com.lania.mca18.registrosdci;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,14 +25,20 @@ import com.lania.mca18.service.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ListadoActivity extends Fragment {
-    private Spinner spinner1;
+import java8.util.stream.Collector;
+
+public class ListadoActivity extends Fragment implements SearchView.OnQueryTextListener {
+    private Spinner spnList;
     View view;
 
     List<Item> itemsList;
+    List<Item> foundItemsList;
     Service service;
     Item chosenItemType;
+    Button btnSearch;
+    SearchView svSearch;
 
 
     // Recycler
@@ -65,12 +70,12 @@ public class ListadoActivity extends Fragment {
 
 
         // Inicializa opciones de listados
-        spinner1 = (Spinner)view.findViewById(R.id.spinner4);
+        spnList = (Spinner)view.findViewById(R.id.spinner4);
         String [] opciones = {"Personas", "Equipos"};
 
         ArrayAdapter <String> spinner_adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item_dci, opciones);
-        spinner1.setAdapter(spinner_adapter);
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spnList.setAdapter(spinner_adapter);
+        spnList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
@@ -97,15 +102,23 @@ public class ListadoActivity extends Fragment {
             }
         });
 
+        svSearch = (SearchView)view.findViewById(R.id.svSearch);
+        svSearch.setOnQueryTextListener(this);
+
         return view;
+    }
+
+    private Thread setLoadingThread() {
+        return setLoadingThread(true);
     }
 
     /**
      * Crea el hilo sobre el cual correrá el proceso
      * de obtención de datos.
+     * @param loadData Elige si se cargan los datos desde el servicio.
      * @return Thread obtención de datos para la vista "ListadoActivity"
      */
-    private Thread setLoadingThread()
+    private Thread setLoadingThread(boolean loadData)
     {
         itemsList = new ArrayList<>();  // Limpia datos anteriores
         Thread tr = new Thread()
@@ -116,8 +129,11 @@ public class ListadoActivity extends Fragment {
                 // Obtiene datos.
                 try
                 {
-                    itemsList = service.getData(getActivity().getApplicationContext(),
-                            "", chosenItemType);
+                    if(loadData)
+                    {
+                        itemsList = service.getData(getActivity().getApplicationContext(),
+                                "", chosenItemType);
+                    }
                 } catch (Exception ex)
                 {
                     Log.d("Thread tr", "Ha ocurrido un error al intentar cargar los datos");
@@ -129,9 +145,9 @@ public class ListadoActivity extends Fragment {
                     public void run() {
                         try
                         {
-                            if(itemsList != null)
+                            if(itemsList != null || foundItemsList != null)
                             {
-                                if(itemsList.size() == 0)
+                                if(itemsList.size() == 0 && loadData == true)
                                 {
                                     Toast.makeText(getActivity().getApplicationContext(),
                                             "No hay eventos resgistrados", Toast.LENGTH_SHORT).show();
@@ -143,7 +159,11 @@ public class ListadoActivity extends Fragment {
                                 }
 
                                 //Para mostrar en interfaz de usuario
-                                adapter = new ItemsListAdapter(itemsList);
+                                if(loadData)
+                                    adapter = new ItemsListAdapter(itemsList);
+                                else
+                                    adapter = new ItemsListAdapter(foundItemsList);
+
                                 recycler.setAdapter(adapter);
                             }
                             else
@@ -169,5 +189,46 @@ public class ListadoActivity extends Fragment {
         };
 
         return tr;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Log.d("Busqueda", query);
+
+        try
+        {
+            foundItemsList = null;
+
+            if (itemsList.get(0) instanceof Equipo) {
+                foundItemsList = java8.util.stream.StreamSupport.stream(itemsList)
+                        .filter(x -> ((Equipo) x).getNombre()
+                                .toUpperCase().equals(query.toUpperCase()))
+                        .collect(java8.util.stream.Collectors.toList());
+            } else if (itemsList.get(0) instanceof Persona) {
+                foundItemsList = java8.util.stream.StreamSupport.stream(itemsList)
+                        .filter(x -> ((Persona) x).getNombre()
+                                .toUpperCase().equals(query.toUpperCase()))
+                        .collect(java8.util.stream.Collectors.toList());
+            }
+
+            Toast.makeText(getContext(), "Se encontró " + String.valueOf(foundItemsList.size()) + " elementos.",
+                    Toast.LENGTH_LONG).show();
+
+            Thread tr = setLoadingThread(false);
+            tr.start();
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Log.e("Busqueda", ex.getMessage());
+
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }
