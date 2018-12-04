@@ -22,6 +22,7 @@ import com.lania.mca18.service.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 public class RegistroESFragment extends Activity {
@@ -50,18 +51,31 @@ public class RegistroESFragment extends Activity {
         val5= (TextInputEditText) findViewById(R.id.val_5);
         val6= (TextInputEditText) findViewById(R.id.val_6);
         val7= (TextInputEditText) findViewById(R.id.val_7);
-        val1.setText(valor);
-        val2.setText(valor);
-        val3.setText(valor);
-        val4.setText(valor);
-        val5.setText(valor);
-        val6.setText(valor);
-        val7.setText(valor);
-        if(persona!=null){
-        persona= (Persona) service.getItem(valor,"Persona");
 
-        val2.setText(persona.getNombre());
-        }else{
+        persona = new Persona(Long.parseLong(valor));
+        persona.setAction(Item.GETDATAID);
+
+        List<Item> p = Service.getData(persona);
+        try
+        {
+            persona = (Persona)p.get(0);
+        } catch(Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "Ocurrió un error al cargar los datos de esta persona",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        if(persona!=null)
+        {
+            val1.setText(persona.getNombre());
+            val2.setText(persona.getInstitucionDeOrigen());
+            val3.setText(persona.getFacebook());
+            val4.setText(persona.getEquipo().getNombre());
+            val5.setText(persona.getComputadora().getColor());
+            val6.setText(persona.getComputadora().getModelo());
+            val7.setText(persona.getCorreo());
+        }
+        else{
             Log.e("Error","no se carga el objeto");
         }
         ImageButton imaBot = (ImageButton) findViewById(R.id.ico_mod);
