@@ -1,7 +1,9 @@
 package com.lania.mca18.registrosdci;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -147,8 +149,15 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
                 try {
                     String str = Service.registerIO(persona);
                     Log.d("loadThread", str);
-                    if(str.length()>0){
-                        Toast.makeText(getApplicationContext(), "registro correcto",Toast.LENGTH_LONG).show();
+
+                    if(str!= null){
+                        AlertDialog.Builder builder =  new AlertDialog.Builder(getApplicationContext());
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
                     }else{
                         Toast.makeText(getApplicationContext(),"no se registro",Toast.LENGTH_LONG).show();
                     }
