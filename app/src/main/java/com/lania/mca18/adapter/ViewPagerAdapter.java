@@ -1,4 +1,4 @@
-package com.lania.mca18.registrosdci;
+package com.lania.mca18.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
