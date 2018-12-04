@@ -12,6 +12,7 @@ public class Item {
     public static String CREATE = "create";
     public static String LIST = "list";
     public static String REG_IO = "ioregistro";
+    public static String GETDATAID = "";
     public static String REG_IOCreate = Item.REG_IO + "/" + Item.CREATE;
 
     public long getId() {

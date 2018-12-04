@@ -243,6 +243,7 @@ public class Service {
             else
                 Log.d("Estado", "No hay datos en la cadena JSON");
             Log.d("JSON ", json);
+            return json;
         }
         catch (TimeoutException tex)
         {
@@ -257,8 +258,6 @@ public class Service {
             Log.e("Exception", "Error con tarea asíncrona");
             Log.e("Error tarea", ex.getMessage());
         }
-        finally {
-            return  json;
-        }
+        return json;
     }
 }
