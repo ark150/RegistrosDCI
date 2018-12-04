@@ -63,6 +63,7 @@ public class DataAsync extends AsyncTask<Item, Void, String>
                 strUrl += type + "/" + action;
             } else
             {
+                type = "registro";
                 strUrl += Item.REG_IOCreate;
             }
 

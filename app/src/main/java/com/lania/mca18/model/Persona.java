@@ -77,6 +77,10 @@ public class Persona extends Item {
         this.hash = hash;
     }
 
+    /**
+     * Establece si es una entrada o una salida.
+     * @param reg Verdadero es entrada. Falso es salida.
+     */
     public void setRegist(boolean reg) { this.reg = reg; }
 
     public boolean getRegist() { return this.reg; }

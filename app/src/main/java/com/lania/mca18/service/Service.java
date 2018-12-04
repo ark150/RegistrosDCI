@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -223,9 +224,46 @@ public class Service {
         }
     }
 
-    /*public static  getData(Item item) {
+    @Nullable
+    public static String registerIO(Item item)
+    {
+        String json = "";
 
-    }*/
+        try
+        {
+            json = getJsonAux(item);
+        }
+        catch (Exception ex)
+        {
+            Log.e("Exception", "Error con tarea asíncrona");
+            Log.e("Error tarea", ex.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if (json.trim() != "")
+                {
+                    // items = getItemsList(new JSONObject(json));
+                    JSONObject jo = new JSONObject(json);
+                    //ZonedDateTime zdt = ZonedDateTime.parse(jo.get("createdAt").toString());
+
+                    JSONArray ja = new JSONArray(jo.get("object").toString());
+                    return (((JSONObject)(ja.get(0))).get("createdAt")).toString();
+                }
+                else
+                {
+                    Log.d("Datos JSON", "No se encontraron datos");
+                    return null;
+                }
+            } catch (Exception ex)
+            {
+                Log.e("JSON Exception", "Error al leer JSON/Agregar objetos a la lista de elementos");
+            }
+
+            return null;
+        }
+    }
 
     private static String getJsonAux(Item item)
     {

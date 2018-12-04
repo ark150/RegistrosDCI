@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class RegistroESFragment extends Activity {
+public class RegistroESFragment extends Activity implements Button.OnClickListener {
     private TextInputEditText val1;
     private TextInputEditText val2;
     private TextInputEditText val3;
@@ -38,6 +38,7 @@ public class RegistroESFragment extends Activity {
     Item chosenItemType;
     Item item;
     Persona persona;
+    Button btnEntrada, btnSalida;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,19 +93,53 @@ public class RegistroESFragment extends Activity {
             }
         });
 
-        Button btnEntrada = (Button) findViewById(R.id.btnRegistrarE);
-        btnEntrada.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDateFormat sdt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                String date = sdt.format(new Date());
-                Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
-            }
-        });
+        btnEntrada = (Button)findViewById(R.id.btnRegistrarE);
+        btnEntrada.setTag(true);
+        btnSalida = (Button)findViewById(R.id.btnRegistrarS);
+        btnSalida.setTag(false);
 
-
-
+        btnEntrada.setOnClickListener(this);
+        btnSalida.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View view) {
+        SimpleDateFormat sdt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String date = sdt.format(new Date());
+        Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
 
+        persona.setAction(Item.REG_IO);
+
+        // Verdadero significa que es entrada
+        if(((boolean)((Button)view).getTag()))
+        {
+            persona.setRegist(true);
+        }
+        else // Falso significa que es salida
+        {
+            persona.setRegist(false);
+        }
+
+        loadThread().start();
+    }
+
+    private Thread loadThread()
+    {
+        Thread tr = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                // Obtiene datos.
+                try {
+                    String str = Service.registerIO(persona);
+                    Log.d("loadThread", str);
+                } catch (Exception ex) {
+
+                }
+            }
+        };
+
+        return tr;
+    }
 }
