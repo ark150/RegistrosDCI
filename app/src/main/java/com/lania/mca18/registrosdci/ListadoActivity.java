@@ -131,8 +131,9 @@ public class ListadoActivity extends Fragment implements SearchView.OnQueryTextL
                 {
                     if(loadData)
                     {
-                        itemsList = service.getData(getActivity().getApplicationContext(),
-                                "", chosenItemType);
+                        /*itemsList = service.getData(getActivity().getApplicationContext(),
+                                "", chosenItemType);*/
+                        itemsList = service.getData(chosenItemType);
                     }
                 } catch (Exception ex)
                 {
