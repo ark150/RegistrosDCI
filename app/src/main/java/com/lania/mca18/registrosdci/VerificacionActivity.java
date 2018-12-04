@@ -1,5 +1,6 @@
 package com.lania.mca18.registrosdci;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lania.mca18.adapter.ItemsListAdapter;
@@ -20,48 +22,17 @@ import com.lania.mca18.service.Service;
 import java.util.ArrayList;
 
 
-public class VerificacionActivity extends Fragment implements View.OnClickListener {
-    View view;
-    ImageButton imgBQR;
-    Button btnLimpiar, btnAceptar;
-    Service service;
-
-    private TextInputEditText val1;
-    public VerificacionActivity(){
-
-    }
-
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.verificacion,container,false);
-
-        //String valor=getArguments().getString("code_qr");
-        //val1 = (TextInputEditText) view.findViewById(R.id.val_1);
-        //val1.setText(valor);
-
-        //btnAceptar = (Button)view.findViewById(R.id.btnAceptar);
-        //btnAceptar.setOnClickListener(this);
-
-        return view;
-    }
+public class VerificacionActivity extends Activity {
+    private TextView text;
 
     @Override
-    /**
-     * Evento onClick para el botón "btnAceptar"
-     */
-    public void onClick(View v) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.verificacion);
+        String equipo = getIntent().getExtras().getString("idEquipo");
+        text = (TextView)  findViewById(R.id.nomEqu);
+        text.setText(equipo);
 
     }
 
-    
-
-    /*private boolean validateData()
-    {
-        boolean valid = true;
-        if()
-
-        return valid;
-    }*/
 }

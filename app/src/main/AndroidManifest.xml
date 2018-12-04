@@ -26,6 +26,7 @@
         <activity android:name=".CamaraActivity" />
         <activity android:name=".RegistroESFragment" />
         <activity android:name=".ModificarActivity"/>
+        <activity android:name=".VerificacionActivity"/>
     </application>
 
 </manifest>

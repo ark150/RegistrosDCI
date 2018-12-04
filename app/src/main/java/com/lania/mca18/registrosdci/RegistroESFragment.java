@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.lania.mca18.model.Item;
@@ -41,7 +42,7 @@ public class RegistroESFragment extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_registro_e);
-        final String valor=getIntent().getExtras().getString("code_qr");
+        final String valor=getIntent().getExtras().getString("idPersona");
         val1 = (TextInputEditText) findViewById(R.id.val_1);
         val2= (TextInputEditText) findViewById(R.id.val_2);
         val3= (TextInputEditText) findViewById(R.id.val_3);
@@ -63,9 +64,9 @@ public class RegistroESFragment extends Activity {
         }else{
             Log.e("Error","no se carga el objeto");
         }
+        ImageButton imaBot = (ImageButton) findViewById(R.id.ico_mod);
 
-        Button button= (Button) findViewById(R.id.btn_mod);
-        button.setOnClickListener(new View.OnClickListener() {
+        imaBot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle= new Bundle();

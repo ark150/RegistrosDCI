@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //agregar fragments
         adapter.addFragment(new ListadoActivity(),"Listado");
-        adapter.addFragment(new VerificacionActivity(),"Verificacion");
         adapter.addFragment (new LectorActivity(),"Registro I/O");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
