@@ -89,6 +89,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
                             Toast.LENGTH_SHORT).show();
                     Intent i= new Intent(view.getContext(), RegistroESFragment.class);
                     i.putExtra("idPersona", String.valueOf(view.getTag()));
+                    i.putExtra("from","lista");
                     view.getContext().startActivity(i);
                 }else if(band==1){
                     Toast.makeText(view.getContext(),

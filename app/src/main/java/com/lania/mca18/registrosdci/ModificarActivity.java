@@ -4,8 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.lania.mca18.model.Item;
+import com.lania.mca18.model.Persona;
+import com.lania.mca18.service.Service;
+
+import java.util.List;
 
 public class ModificarActivity extends Activity {
     private TextInputEditText mod1;
@@ -16,6 +24,7 @@ public class ModificarActivity extends Activity {
     private TextInputEditText mod6;
     private TextInputEditText mod7;
 
+    Persona persona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +38,41 @@ public class ModificarActivity extends Activity {
         mod6 = (TextInputEditText) findViewById(R.id.mod_6);
         mod7= (TextInputEditText) findViewById(R.id.mod_7);
         String idre = getIntent().getExtras().getString("id");
-        mod1.setText(idre);
-        mod2.setText(idre);
-        mod3.setText(idre);
-        mod4.setText(idre);
-        mod5.setText(idre);
-        mod6.setText(idre);
-        mod7.setText(idre);
+        persona = new Persona(Long.parseLong(idre));
+        persona.setAction(Item.GETDATAID);
+
+        List<Item> p = Service.getData(persona);
+        try
+        {
+            persona = (Persona)p.get(0);
+        } catch(Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "Ocurrió un error al cargar los datos de esta persona",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        if(persona!=null)
+        {
+            mod1.setText(persona.getNombre());
+            mod2.setText(persona.getInstitucionDeOrigen());
+            mod3.setText(persona.getFacebook());
+            mod4.setText(persona.getEquipo().getNombre());
+            mod5.setText(persona.getComputadora().getColor());
+            mod6.setText(persona.getComputadora().getModelo());
+            mod7.setText(persona.getCorreo());
+        }
+        else{
+            Log.e("Error","no se carga el objeto");
+        }
+
 
         Button botonAceptar = (Button) findViewById(R.id.btnAceptar);
         botonAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //metodo para modificar datos del usuario
+                persona.setAction(Item.CREATE);
+
 
                 //metodo para mandar a la pantalla principal
                 Intent i= new Intent(getApplicationContext(),MainActivity.class);

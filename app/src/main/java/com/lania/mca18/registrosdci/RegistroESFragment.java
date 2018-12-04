@@ -44,7 +44,7 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_registro_e);
-        final String valor=getIntent().getExtras().getString("idPersona");
+        final String fr = getIntent().getExtras().getString("from");
         val1 = (TextInputEditText) findViewById(R.id.val_1);
         val2= (TextInputEditText) findViewById(R.id.val_2);
         val3= (TextInputEditText) findViewById(R.id.val_3);
@@ -52,18 +52,30 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
         val5= (TextInputEditText) findViewById(R.id.val_5);
         val6= (TextInputEditText) findViewById(R.id.val_6);
         val7= (TextInputEditText) findViewById(R.id.val_7);
+        if(fr.equals("lista")) {
+            final String valor=getIntent().getExtras().getString("idPersona");
+            persona = new Persona(Long.parseLong(valor));
+            persona.setAction(Item.GETDATAID);
 
-        persona = new Persona(Long.parseLong(valor));
-        persona.setAction(Item.GETDATAID);
+            List<Item> p = Service.getData(persona);
+            try {
+                persona = (Persona) p.get(0);
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(), "Ocurrió un error al cargar los datos de esta persona",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }else if(fr.equals("camara")){
+            final String valor=getIntent().getExtras().getString("hash");
+            persona = new Persona(Long.parseLong(valor));
+            persona.setAction(Item.GETDATAID);
 
-        List<Item> p = Service.getData(persona);
-        try
-        {
-            persona = (Persona)p.get(0);
-        } catch(Exception ex)
-        {
-            Toast.makeText(getApplicationContext(), "Ocurrió un error al cargar los datos de esta persona",
-                    Toast.LENGTH_SHORT).show();
+            List<Item> p = Service.getData(persona);
+            try {
+                persona = (Persona) p.get(0);
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(), "Ocurrió un error al cargar los datos de esta persona",
+                        Toast.LENGTH_SHORT).show();
+            }
         }
 
         if(persona!=null)
@@ -79,15 +91,16 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
         else{
             Log.e("Error","no se carga el objeto");
         }
+        String idPer= Long.toString(persona.getId());
         ImageButton imaBot = (ImageButton) findViewById(R.id.ico_mod);
 
         imaBot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle= new Bundle();
-                bundle.putString("id",valor);
+                bundle.putString("id",idPer);
                 Intent i = new Intent(getApplicationContext(),ModificarActivity.class);
-                i.putExtra("id",valor);
+                i.putExtra("id",idPer);
                 startActivity(i);
 
             }
@@ -106,7 +119,7 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
     public void onClick(View view) {
         SimpleDateFormat sdt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String date = sdt.format(new Date());
-        Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
 
         persona.setAction(Item.REG_IO);
 
@@ -134,6 +147,12 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
                 try {
                     String str = Service.registerIO(persona);
                     Log.d("loadThread", str);
+                    if(str.length()>0){
+                        Toast.makeText(getApplicationContext(), "registro correcto",Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(),"no se registro",Toast.LENGTH_LONG).show();
+                    }
+
                 } catch (Exception ex) {
 
                 }

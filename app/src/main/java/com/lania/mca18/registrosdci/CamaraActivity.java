@@ -53,9 +53,10 @@ public class CamaraActivity extends Activity implements ZBarScannerView.ResultHa
         String pantalla=getIntent().getExtras().getString("pantalla");
         if(pantalla.equals("reg")) {
             Bundle bundle = new Bundle();
-            bundle.putString("code_qr", rawResult.getContents().toString());
+            bundle.putString("hash", rawResult.getContents().toString());
             Intent i = new Intent(this, RegistroESFragment.class);
-            i.putExtra("code_qr", rawResult.getContents().toString());
+            i.putExtra("hash", rawResult.getContents().toString());
+            i.putExtra("from","camara");
             startActivity(i);
         }else{
             Bundle bundle = new Bundle();
