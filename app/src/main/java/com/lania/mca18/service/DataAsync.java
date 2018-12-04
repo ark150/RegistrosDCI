@@ -51,14 +51,20 @@ public class DataAsync extends AsyncTask<Item, Void, String>
                 action += id;
             type = "";
 
-            if (item instanceof Computadora)
-                type += "computadora";
-            else if (item instanceof Equipo)
-                type += "equipo";
-            else if (item instanceof Persona)
-                type += "persona";
+            if(!(item.getAction() == Item.REG_IO))
+            {
+                if (item instanceof Computadora)
+                    type += "computadora";
+                else if (item instanceof Equipo)
+                    type += "equipo";
+                else if (item instanceof Persona)
+                    type += "persona";
 
-            strUrl += type + "/" + action;
+                strUrl += type + "/" + action;
+            } else
+            {
+                strUrl += Item.REG_IOCreate;
+            }
 
             URL url = new URL(strUrl);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
@@ -75,8 +81,20 @@ public class DataAsync extends AsyncTask<Item, Void, String>
                 dStream.flush(); // Flushes the data output stream.
                 dStream.close(); // Closing the output stream.
             }
+            else if(item.getAction() == Item.REG_IO)
+            {
+                connection.setDoOutput(true);
+                connection.setRequestMethod("POST");
+                dStream = new DataOutputStream(connection.getOutputStream());
+
+                dStream.writeBytes(((Persona)item).getRegisterItemJSON()); //Writes out the string to the underlying output stream as a sequence of bytes
+                dStream.flush(); // Flushes the data output stream.
+                dStream.close(); // Closing the output stream.
+            }
             else
                 connection.setRequestMethod("GET");
+
+
 
             connection.connect();
 

@@ -186,13 +186,49 @@ public class Service {
     }
 
     @Nullable
-    public static List<Item> getData(Context context, String id, Item item)
+    public static List<Item> getData(Item item)
     {
         List<Item> items = new ArrayList<>();
-        Item it;
-        if (id == null)
-            id = "null";
+        String json = "";
 
+        try
+        {
+            json = getJsonAux(item);
+        }
+        catch (Exception ex)
+        {
+            Log.e("Exception", "Error con tarea asíncrona");
+            Log.e("Error tarea", ex.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if (json.trim() != "")
+                {
+                    items = getItemsList(new JSONObject(json));
+                }
+                else
+                {
+                    Log.d("Datos JSON", "No se encontraron datos");
+                    return null;
+                }
+            } catch (Exception ex)
+            {
+                Log.e("JSON Exception", "Error al leer JSON/Agregar objetos a la lista de elementos");
+            }
+            Log.d("Long lista de elementos", String.valueOf(items.size()));
+
+            return items;
+        }
+    }
+
+    /*public static  getData(Item item) {
+
+    }*/
+
+    private static String getJsonAux(Item item)
+    {
         String json = "";
 
         try
@@ -221,28 +257,8 @@ public class Service {
             Log.e("Exception", "Error con tarea asíncrona");
             Log.e("Error tarea", ex.getMessage());
         }
-        finally
-        {
-            try
-            {
-                if (json.trim() != "") {
-                    //items = getItemsList(json);
-                    //it = getItem(json, "Computadora");
-                    //Log.d("Test Item", String.valueOf(it));
-                    items = getItemsList(new JSONObject(json));
-                }
-                else
-                {
-                    Log.d("Datos JSON", "No se encontraron datos");
-                    return null;
-                }
-            } catch (Exception ex)
-            {
-                Log.e("JSON Exception", "Error al leer JSON/Agregar objetos a la lista de elementos");
-            }
-            Log.d("Long lista de elementos", String.valueOf(items.size()));
-
-            return items;
+        finally {
+            return  json;
         }
     }
 }
