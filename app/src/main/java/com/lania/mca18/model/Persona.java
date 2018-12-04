@@ -77,6 +77,10 @@ public class Persona extends Item {
         this.hash = hash;
     }
 
+    public void setRegist(boolean reg) { this.reg = reg; }
+
+    public boolean getRegist() { return this.reg; }
+
     public Persona()
     {
         super();
@@ -127,5 +131,20 @@ public class Persona extends Item {
         }
 
         return obj.toString();
+    }
+
+    /**
+     * Verdadero: Entrada. Falso: Salida.
+     * @return JSON String de registro.
+     */
+    public String getRegisterItemJSON()
+    {
+        String str = "{\"persona\":{\"id\": " + this.getId() + "}, \"entrada\": ";
+        if(this.getRegist())
+            str += "true, \"salida\":false}";
+        else
+            str += "false, \"salida\":true}";
+
+        return str;
     }
 }

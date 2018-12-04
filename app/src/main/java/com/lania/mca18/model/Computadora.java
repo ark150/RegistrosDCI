@@ -6,7 +6,7 @@ import org.json.JSONObject;
 public class Computadora extends Item {
     private String color;
     private String modelo;
-    private Persona propietario;
+    //private Persona propietario;
 
     public String getColor() {
         return color;
@@ -24,13 +24,14 @@ public class Computadora extends Item {
         this.modelo = modelo;
     }
 
-    public Persona getPropietario() {
+    /*public Persona getPropietario() {
         return propietario;
     }
 
     public void setPropietario(Persona propietario) {
         this.propietario = propietario;
     }
+    */
 
     public Computadora()
     {
