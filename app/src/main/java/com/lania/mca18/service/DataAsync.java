@@ -48,10 +48,21 @@ public class DataAsync extends AsyncTask<Item, Void, String>
             if(!(item.getAction() == ""))
                 action +=  "/";
 
+            if(((Persona)item).getHash().toString() == "")
                 action += id;
+
             type = "";
 
-            if(!(item.getAction() == Item.REG_IO))
+            // Arreglar condicion para que pueda entrar a buscar por hash.
+            if(item.getAction() == Item.GETDATAID
+                && item instanceof Persona && ((Persona) item).getHash() != "")
+            {
+                // /persona/by-hash?hash=aqui_va_el_hash
+                type = "persona";
+                strUrl += type + "/by-hash?hash=" +
+                        ((Persona)item).getHash().toString();
+            }
+            else if(!(item.getAction() == Item.REG_IO))
             {
                 if (item instanceof Computadora)
                     type += "computadora";
@@ -61,7 +72,8 @@ public class DataAsync extends AsyncTask<Item, Void, String>
                     type += "persona";
 
                 strUrl += type + "/" + action;
-            } else
+            }
+            else
             {
                 type = "registro";
                 strUrl += Item.REG_IOCreate;
