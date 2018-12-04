@@ -20,6 +20,9 @@ import com.lania.mca18.model.Item;
 import com.lania.mca18.model.Persona;
 import com.lania.mca18.service.Service;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +47,8 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_registro_e);
-        final String valor=getIntent().getExtras().getString("idPersona");
+        final String valor = getIntent().getExtras().getString("idPersona");
+        final String hash = getQrCodeItem(getIntent().getExtras().getString("code_qr"), "hash");
         val1 = (TextInputEditText) findViewById(R.id.val_1);
         val2= (TextInputEditText) findViewById(R.id.val_2);
         val3= (TextInputEditText) findViewById(R.id.val_3);
@@ -53,7 +57,16 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
         val6= (TextInputEditText) findViewById(R.id.val_6);
         val7= (TextInputEditText) findViewById(R.id.val_7);
 
-        persona = new Persona(Long.parseLong(valor));
+        if(valor != null && valor != "")
+        {
+            persona = new Persona(Long.parseLong(valor));
+        } else
+        {
+            persona = new Persona();
+            persona.setHash(hash);
+        }
+
+        // /persona/by-hash?hash=aqui_va_el_hash
         persona.setAction(Item.GETDATAID);
 
         List<Item> p = Service.getData(persona);
@@ -141,5 +154,25 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
         };
 
         return tr;
+    }
+
+    /**
+     * Obtiene el valor de un objeto JSON leído a través de un código QR.
+     * @param qrc Objeto JSON del código QR en bruto.
+     * @param key Llave del valor que se busca obtener
+     * @return Valor del objeto en base a la llave solicitada.
+     */
+    private String getQrCodeItem(String qrc, String key)
+    {
+        JSONObject ob;
+        String value = "";
+        try {
+            ob = new JSONObject(qrc);
+            value = ob.getString(key).toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return value;
     }
 }
