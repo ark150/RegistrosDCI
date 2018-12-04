@@ -22,6 +22,7 @@
     <string name="but_b">Buscar</string>
     <string name="bot_RegE">Registrar E</string>
     <string name="bot_RegS">Registrar S</string>
+    <string name="bot_mod">boton modificar persona</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
