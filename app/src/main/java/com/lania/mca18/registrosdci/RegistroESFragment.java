@@ -1,6 +1,7 @@
 package com.lania.mca18.registrosdci;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -162,6 +163,10 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
                     public void run() {
                         Toast.makeText(getApplicationContext(), "IOSTR " + iostr,
                                 Toast.LENGTH_SHORT).show();
+                        Intent i= new Intent(getApplicationContext(),MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+
                     }
                 });
             }
