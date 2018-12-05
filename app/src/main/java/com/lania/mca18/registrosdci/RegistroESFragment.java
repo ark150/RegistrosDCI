@@ -3,6 +3,7 @@ package com.lania.mca18.registrosdci;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import com.lania.mca18.model.Item;
 import com.lania.mca18.model.Persona;
 import com.lania.mca18.service.Service;
@@ -107,7 +108,7 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
                 Bundle bundle= new Bundle();
                 bundle.putString("id",valor);
                 Intent i = new Intent(getApplicationContext(),ModificarActivity.class);
-                i.putExtra("gson",(new Gson().toJson(persona)));
+                //i.putExtra("gson",(new Gson().toJson(persona)));
                 startActivity(i);
 
             }
@@ -161,11 +162,43 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "IOSTR " + iostr,
-                                Toast.LENGTH_SHORT).show();
-                        Intent i= new Intent(getApplicationContext(),MainActivity.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
+                        if(iostr.length()>0) {
+                            /*Toast.makeText(getApplicationContext(), "IOSTR " + iostr,
+                                    Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);*/
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegistroESFragment.this,R.style.Theme_AppCompat_DayNight_Dialog);
+                            builder.setIcon(R.drawable.lania_blue);
+                            builder.setTitle("Confirmacion");
+                            builder.setMessage("Registro Exitoso");
+                            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }else {
+                            //Toast.makeText(getApplicationContext(), "no se Registro",Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegistroESFragment.this,R.style.Theme_AppCompat_DayNight_Dialog);
+                            builder.setIcon(R.drawable.lania_blue);
+                            builder.setTitle("ERROR");
+                            builder.setMessage("Ha sucedido un error");
+                            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
 
                     }
                 });
