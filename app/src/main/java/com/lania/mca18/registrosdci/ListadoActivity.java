@@ -37,7 +37,6 @@ public class ListadoActivity extends Fragment implements SearchView.OnQueryTextL
     List<Item> foundItemsList;
     Service service;
     Item chosenItemType;
-    Button btnSearch;
     SearchView svSearch;
 
 
@@ -78,10 +77,6 @@ public class ListadoActivity extends Fragment implements SearchView.OnQueryTextL
         spnList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
-                //Toast t = Toast.makeText(getContext(), "Sel", Toast.LENGTH_SHORT);
-                //t.show();
-
                 switch (position)
                 {
                     case 0:
@@ -154,9 +149,9 @@ public class ListadoActivity extends Fragment implements SearchView.OnQueryTextL
                                             "No hay elementos resgistrados", Toast.LENGTH_SHORT).show();
                                 } else
                                 {
-                                    Toast.makeText(getActivity().getApplicationContext(),
+                                    /*Toast.makeText(getActivity().getApplicationContext(),
                                             "Éxito :D " + itemsList.size(),
-                                            Toast.LENGTH_SHORT).show();
+                                            Toast.LENGTH_SHORT).show();*/
                                 }
 
                                 //Para mostrar en interfaz de usuario

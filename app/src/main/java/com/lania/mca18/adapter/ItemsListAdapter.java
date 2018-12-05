@@ -25,8 +25,6 @@ import java.util.List;
 public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.ItemViewHolder> {
     private List<Item> items;
     private int band;
-    Context context;
-
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder
     {
@@ -80,20 +78,12 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
             @Override
             public void onClick(View view)
             {
-
-
                 // Evento OnClick
                 if(band==0){
-                    Toast.makeText(view.getContext(),
-                            "ID: " + String.valueOf(view.getTag()),
-                            Toast.LENGTH_SHORT).show();
                     Intent i= new Intent(view.getContext(), RegistroESFragment.class);
                     i.putExtra("idPersona", String.valueOf(view.getTag()));
                     view.getContext().startActivity(i);
                 }else if(band==1){
-                    Toast.makeText(view.getContext(),
-                            "ID: " + String.valueOf(view.getTag()),
-                            Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(view.getContext(),VerificacionActivity.class);
                     i.putExtra("idEquipo", String.valueOf(view.getTag()));
                     view.getContext().startActivity(i);
