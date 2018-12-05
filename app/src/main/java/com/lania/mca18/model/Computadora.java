@@ -49,6 +49,8 @@ public class Computadora extends Item {
     {
         super(item.getType());
         this.id = item.getId();
+        this.color = "";
+        this.modelo = "";
     }
 
     protected void initialize()

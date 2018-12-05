@@ -102,6 +102,8 @@ public class Persona extends Item {
     {
         super(item.getType());
         this.id = item.getId();
+        this.equipo = new Equipo();
+        this.computadora = new Computadora();
     }
 
     protected void initialize()
@@ -110,8 +112,8 @@ public class Persona extends Item {
         this.institucionDeOrigen = "";
         this.facebook = "";
         this.correo = "";
-        // this.equipo = new Equipo();
-        // this.computadora = new Computadora();
+        this.equipo = new Equipo();
+        this.computadora = new Computadora();
         this.uuid = "";
         this.hash = "";
     }

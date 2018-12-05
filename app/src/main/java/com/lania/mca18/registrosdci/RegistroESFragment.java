@@ -92,9 +92,14 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
             val1.setText(persona.getNombre());
             val2.setText(persona.getInstitucionDeOrigen());
             val3.setText(persona.getFacebook());
-            val4.setText(persona.getEquipo().getNombre());
-            val5.setText(persona.getComputadora().getColor());
-            val6.setText(persona.getComputadora().getModelo());
+            if(persona.getEquipo() != null)
+                val4.setText(persona.getEquipo().getNombre());
+
+            if(persona.getComputadora() != null) {
+                val5.setText(persona.getComputadora().getColor());
+                val6.setText(persona.getComputadora().getModelo());
+            }
+
             val7.setText(persona.getCorreo());
         }
         else{
