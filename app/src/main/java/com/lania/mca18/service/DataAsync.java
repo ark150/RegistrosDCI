@@ -48,7 +48,7 @@ public class DataAsync extends AsyncTask<Item, Void, String>
             if(!(item.getAction() == ""))
                 action +=  "/";
 
-            if(((Persona)item).getHash().toString() == "")
+            if(((Persona)item).getHash() == null || ((Persona)item).getHash() == "")
                 action += id;
 
             type = "";
@@ -60,7 +60,7 @@ public class DataAsync extends AsyncTask<Item, Void, String>
                 // /persona/by-hash?hash=aqui_va_el_hash
                 type = "persona";
                 strUrl += type + "/by-hash?hash=" +
-                        ((Persona)item).getHash().toString();
+                        ((Persona)item).getHash();
             }
             else if(!(item.getAction() == Item.REG_IO))
             {

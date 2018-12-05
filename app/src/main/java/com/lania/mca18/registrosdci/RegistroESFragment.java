@@ -42,6 +42,7 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
     Item item;
     Persona persona;
     Button btnEntrada, btnSalida;
+    String iostr;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,7 +120,7 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
     public void onClick(View view) {
         SimpleDateFormat sdt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String date = sdt.format(new Date());
-        Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+        // Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
 
         persona.setAction(Item.REG_IO);
 
@@ -145,11 +146,19 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
             {
                 // Obtiene datos.
                 try {
-                    String str = Service.registerIO(persona);
-                    Log.d("loadThread", str);
+                    iostr = Service.registerIO(persona);
+                    Log.d("loadThread", iostr);
                 } catch (Exception ex) {
-
+                    iostr = "";
                 }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "IOSTR " + iostr,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         };
 
