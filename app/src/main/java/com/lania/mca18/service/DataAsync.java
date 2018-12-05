@@ -48,8 +48,9 @@ public class DataAsync extends AsyncTask<Item, Void, String>
             if(!(item.getAction() == ""))
                 action +=  "/";
 
-            if(item instanceof Persona &&
-                    (((Persona)item).getHash() == null || ((Persona)item).getHash() == ""))
+            if(item instanceof Equipo || item instanceof Computadora ||
+                    (item instanceof Persona &&
+                    (((Persona)item).getHash() == null || ((Persona)item).getHash() == "")))
                 action += id;
 
             type = "";
@@ -73,6 +74,11 @@ public class DataAsync extends AsyncTask<Item, Void, String>
                     type += "persona";
 
                 strUrl += type + "/" + action;
+
+                if (item instanceof Equipo && ((Equipo)item).getDetallado()) {
+                    strUrl += "/" + Equipo.INTEGRANTES;
+                    type = "persona";
+                }
             }
             else
             {

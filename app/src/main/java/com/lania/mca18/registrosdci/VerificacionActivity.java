@@ -30,10 +30,6 @@ import java.util.List;
 
 public class VerificacionActivity extends Activity {
     private TextView text;
-    List<Item> itemsList;
-    List<Item> foundItemsList;
-    Service service;
-    Item itemType;
     Equipo equipo;
 
     private RecyclerView recycler;
@@ -50,10 +46,15 @@ public class VerificacionActivity extends Activity {
 
         equipo = new Equipo(Long.parseLong(iequipo));
         equipo.setAction(Item.GETDATAID);
+        equipo.setDetallado(true);
 
         List<Item> p = Service.getData(equipo);
         try {
-            equipo = (Equipo) p.get(0);
+            equipo.setIntegrantes(java8.util.stream.StreamSupport
+                    .stream(p)
+                    .map(x -> (Persona)x)
+                    .collect(java8.util.stream.Collectors.toList()));
+            p = null;
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Ocurrió un error al cargar los datos de esta persona",
                     Toast.LENGTH_SHORT).show();
@@ -63,13 +64,12 @@ public class VerificacionActivity extends Activity {
         if(equipo != null) {
             text.setText(equipo.getNombre());
         }
-        //se cargan los miembros del equipo
-        itemsList = new ArrayList<>();
-        service = new Service();
+
         recycler = (RecyclerView) findViewById(R.id.listaPerEqui);
         IManager = new LinearLayoutManager(getApplicationContext());
         recycler.setLayoutManager(IManager);
-        itemType=new Persona();
+
+        /*itemType=new Persona();
         itemType.setAction(Item.LIST);
         itemsList=new ArrayList<>();
         itemsList=service.getData(itemType);
@@ -83,9 +83,7 @@ public class VerificacionActivity extends Activity {
             recycler.setAdapter(adapter);
         }else{
             Toast.makeText(getApplicationContext(),"No se encontraron datos",Toast.LENGTH_LONG).show();
-        }
-
-
+        }*/
     }
 
 }
