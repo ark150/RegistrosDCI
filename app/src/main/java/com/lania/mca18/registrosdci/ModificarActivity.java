@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class ModificarActivity extends Activity {
+import com.google.gson.Gson;
+import com.lania.mca18.model.Persona;
+
+public class ModificarActivity extends Activity implements Button.OnClickListener {
     private TextInputEditText mod1;
     private TextInputEditText mod2;
     private TextInputEditText mod3;
@@ -15,7 +19,7 @@ public class ModificarActivity extends Activity {
     private TextInputEditText mod5;
     private TextInputEditText mod6;
     private TextInputEditText mod7;
-
+    Persona persona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,37 +32,36 @@ public class ModificarActivity extends Activity {
         mod5 = (TextInputEditText) findViewById(R.id.mod_5);
         mod6 = (TextInputEditText) findViewById(R.id.mod_6);
         mod7= (TextInputEditText) findViewById(R.id.mod_7);
-        String idre = getIntent().getExtras().getString("id");
-        mod1.setText(idre);
-        mod2.setText(idre);
-        mod3.setText(idre);
-        mod4.setText(idre);
-        mod5.setText(idre);
-        mod6.setText(idre);
-        mod7.setText(idre);
 
-        Button botonAceptar = (Button) findViewById(R.id.btnAceptar);
-        botonAceptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //metodo para modificar datos del usuario
+        try {
+            String pstr = getIntent().getExtras().getString("gson");
+            persona = new Gson().fromJson(pstr, Persona.class);
+        } catch (Exception ex)
+        {
+            persona = new Persona();
+            Toast.makeText(getApplicationContext(),
+                    "Ocurrió un error al deserializar los datos",
+                    Toast.LENGTH_SHORT).show();
+        }
 
-                //metodo para mandar a la pantalla principal
-                Intent i= new Intent(getApplicationContext(),MainActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+        mod1.setText(persona.getNombre());
+        mod2.setText(persona.getInstitucionDeOrigen());
+        mod3.setText(persona.getFacebook());
+        mod4.setText(persona.getEquipo().getNombre());
+        mod5.setText(persona.getComputadora().getColor());
+        mod6.setText(persona.getComputadora().getModelo());
+        mod7.setText(persona.getCorreo());
 
-            }
-        });
+        Button btnAceptar = (Button)findViewById(R.id.btnAceptar);
+        btnAceptar.setOnClickListener(this);
 
-        Button botonLimpiar = (Button) findViewById(R.id.btnLimpiar);
+        Button botonLimpiar = (Button)findViewById(R.id.btnLimpiar);
         botonLimpiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 limpiar();
             }
         });
-
     }
 
     public void limpiar(){
@@ -69,5 +72,31 @@ public class ModificarActivity extends Activity {
         mod5.setText("");
         mod6.setText("");
         mod7.setText("");
+    }
+
+    @Override
+    public void onClick(View v) {
+        //metodo para modificar datos del usuario
+
+        getModThread();
+
+        //metodo para mandar a la pantalla principal
+        Intent i= new Intent(getApplicationContext(), MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+
+    private Thread getModThread()
+    {
+        Thread tr = new Thread()
+        {
+            @Override
+            public void run()
+            {
+
+            }
+        };
+
+        return tr;
     }
 }

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lania.mca18.model.Item;
 import com.lania.mca18.model.Persona;
 import com.lania.mca18.service.Service;
@@ -105,7 +106,7 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
                 Bundle bundle= new Bundle();
                 bundle.putString("id",valor);
                 Intent i = new Intent(getApplicationContext(),ModificarActivity.class);
-                i.putExtra("id",valor);
+                i.putExtra("gson",(new Gson().toJson(persona)));
                 startActivity(i);
 
             }
