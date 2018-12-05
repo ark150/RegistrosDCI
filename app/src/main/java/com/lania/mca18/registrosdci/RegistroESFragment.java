@@ -42,14 +42,18 @@ public class RegistroESFragment extends Activity implements Button.OnClickListen
     Item item;
     Persona persona;
     Button btnEntrada, btnSalida;
-    String iostr;
+    String iostr, hash = "", valor = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_registro_e);
-        final String valor = getIntent().getExtras().getString("idPersona");
-        final String hash = getQrCodeItem(getIntent().getExtras().getString("code_qr"), "hash");
+
+        if(getIntent().getExtras().getString("idPersona") != null)
+            valor = getIntent().getExtras().getString("idPersona");
+        if(getIntent().getExtras().getString("code_qr") != null)
+            hash = getQrCodeItem(getIntent().getExtras().getString("code_qr"), "hash");
+
         val1 = (TextInputEditText) findViewById(R.id.val_1);
         val2= (TextInputEditText) findViewById(R.id.val_2);
         val3= (TextInputEditText) findViewById(R.id.val_3);

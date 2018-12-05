@@ -151,7 +151,7 @@ public class ListadoActivity extends Fragment implements SearchView.OnQueryTextL
                                 if(itemsList.size() == 0 && loadData == true)
                                 {
                                     Toast.makeText(getActivity().getApplicationContext(),
-                                            "No hay eventos resgistrados", Toast.LENGTH_SHORT).show();
+                                            "No hay elementos resgistrados", Toast.LENGTH_SHORT).show();
                                 } else
                                 {
                                     Toast.makeText(getActivity().getApplicationContext(),

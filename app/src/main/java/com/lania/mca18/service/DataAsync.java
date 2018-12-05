@@ -48,7 +48,8 @@ public class DataAsync extends AsyncTask<Item, Void, String>
             if(!(item.getAction() == ""))
                 action +=  "/";
 
-            if(((Persona)item).getHash() == null || ((Persona)item).getHash() == "")
+            if(item instanceof Persona &&
+                    (((Persona)item).getHash() == null || ((Persona)item).getHash() == ""))
                 action += id;
 
             type = "";
