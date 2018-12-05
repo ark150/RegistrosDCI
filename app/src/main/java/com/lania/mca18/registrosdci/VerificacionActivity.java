@@ -69,6 +69,12 @@ public class VerificacionActivity extends Activity {
         IManager = new LinearLayoutManager(getApplicationContext());
         recycler.setLayoutManager(IManager);
 
+        adapter = new ItemsListAdapter((java8.util.stream.StreamSupport
+                .stream(equipo.getIntegrantes())
+                .map(x -> (Item)x)
+                .collect(java8.util.stream.Collectors.toList())));
+        recycler.setAdapter(adapter);
+
         /*itemType=new Persona();
         itemType.setAction(Item.LIST);
         itemsList=new ArrayList<>();
