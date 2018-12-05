@@ -47,9 +47,9 @@ public class ModificarActivity extends Activity implements Button.OnClickListene
         mod1.setText(persona.getNombre());
         mod2.setText(persona.getInstitucionDeOrigen());
         mod3.setText(persona.getFacebook());
-        //mod4.setText(persona.getEquipo().getNombre());
-        //mod5.setText(persona.getComputadora().getColor());
-        //mod6.setText(persona.getComputadora().getModelo());
+        mod4.setText(persona.getEquipo().getNombre());
+        mod5.setText(persona.getComputadora().getColor());
+        mod6.setText(persona.getComputadora().getModelo());
         mod7.setText(persona.getCorreo());
 
         Button btnAceptar = (Button)findViewById(R.id.btnAceptar);
